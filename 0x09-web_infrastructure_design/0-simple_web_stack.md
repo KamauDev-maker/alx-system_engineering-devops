@@ -1,6 +1,6 @@
 # Simple Web Stack
 
-! [Image of a simple web stack](Simple web stack.jpg)
+![Image of a simple web stack](Simple web stack.jpg)
 
 [visit Board](https://miro.com/app/board/uXjVPjLyaes=/#tpicker-content)
 
