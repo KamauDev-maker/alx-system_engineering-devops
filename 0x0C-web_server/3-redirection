@@ -22,7 +22,7 @@ new_config=\
 }
 "
 
-echo "$new_config" > /etc/nginx/sites-available/default
+echo "$new_config" | sudo tee /etc/nginx/sites-available/default
 if [ "$(pgrep nginx)" -le 0 ];
 then
    sudo service nginx start
