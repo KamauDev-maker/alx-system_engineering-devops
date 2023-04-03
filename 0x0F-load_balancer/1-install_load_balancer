@@ -5,11 +5,11 @@ sudo apt-get -y install haproxy=2.6.\*
 
 sudo echo \
 	"
-frontend localnodes
+frontend http-in
 	bind *:80
 	mode http
-	default_backend nodes
-backend nodes
+	default_backend servers
+backend servers
 	mode http
 	balance roundrobin
 	server 104666-web-01 3.84.238.176:80 check
