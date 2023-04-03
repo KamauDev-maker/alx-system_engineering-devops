@@ -15,7 +15,7 @@ new_config=\
                root /var/www/html;
         index index.html index.htm index.nginx-debian.html;
         server_name _;
-	new_header X-Served-by \$hostname;
+	add_header X-Served-by $hostname;
         location / {
                 try_files \$uri \$uri/ =404;
         }
