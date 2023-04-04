@@ -11,8 +11,8 @@ frontend http-in
 backend servers
 	mode http
 	balance roundrobin
-	server web-01 3.84.238.176:80 check
-	server web-02 52.91.121.231:80 check
+	server 104666-web-01 3.84.238.176:80 check
+	server 104666-web-02 52.91.121.231:80 check
 EOT
 sudo /etc/init.d/haproxy start
 #boot the server
