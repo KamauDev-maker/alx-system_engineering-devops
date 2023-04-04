@@ -14,4 +14,7 @@ backend servers
 	server web-01 3.84.238.176:80 check
 	server web-02 52.91.121.231:80 check
 EOT
-sudo service haproxy restart
+sudo /etc/init.d/haproxy start
+#boot the server
+sudo update-rc.d haproxy defaults
+sudo /etc/int.d/haproxy reload
