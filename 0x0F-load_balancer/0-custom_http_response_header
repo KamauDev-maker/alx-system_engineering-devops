@@ -5,31 +5,7 @@
 # of the server Nginx is running on
 sudo apt-get update
 sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
-echo 'Hello World' | sudo tee /var/www/html/index.html
-
-new_config=\
-"server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-               root /var/www/html;
-        index index.html index.htm index.nginx-debian.html;
-        server_name _;
-	add_header X-Served-By $hostname;
-        location / {
-                try_files \$uri \$uri/ =404;
-        }
-        error_page 404 /404.html;
-        location  /404.html {
-            internal;
-        }
-        
-        if (\$request_filename ~ redirect_me){
-            rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
-        }
-}
-"
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
-
-echo "$new_config" | sudo tee /etc/nginx/sites-available/default
+sudo service nginx start
+sudo sed -i '11i\\\tadd_header X-Served-By $HOSTNAME;' /etc/nginx/nginx.conf
+echo 'Hello World!' | sudo tee /usr/share/nginx/html/index.html
 sudo service nginx restart
