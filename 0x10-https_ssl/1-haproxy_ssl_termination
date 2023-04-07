@@ -21,7 +21,7 @@ defaults
 	errorfile 504 /etc/haproxy/errors/504.http
 frontend frontend
         bind *:80
-	bind *:443 ssl crt /etc/haproxy/certs/www.kamaudev.tech.pem
+	bind *:443 ssl crt /etc/ssl/kamaudev.tech.pem
         default_backend servers
 
 
