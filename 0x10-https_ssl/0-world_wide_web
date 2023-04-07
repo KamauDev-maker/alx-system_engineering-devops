@@ -7,4 +7,4 @@ else
    dom_all="$2.$1"
 fi
 
-dig "$dom_all" | awk '/ANSWER SECTION:/{getline; split($1,b,"."); print "The subdomain", b[1], "is a", $4, "record and points to", $5}'
+dig $dom_all | awk '/ANSWER SECTION:/{getline; split($1,b,"."); print "The subdomain", b[1], "is a", $4, "record and points to", $5}'
