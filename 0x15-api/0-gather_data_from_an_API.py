@@ -3,7 +3,7 @@
 A script using this REST API, for a given employee ID
 returns information about his/her TODO list progress.
 """
-if __name__ = '__main__':
+if __name__ == '__main__':
     import requests
     import sys
 
