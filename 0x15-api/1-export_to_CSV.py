@@ -12,49 +12,24 @@ if __name__ == '__main__':
     employee_id = int(sys.argv[1])
 
     user_info_url = "{}/users/{}".format(base_url, employee_id)
-    user_info_response = requests.get(user_info_url)
-    user_info = user_info_response.json()
-    employee_name = user_info["name"]
-
-    todo_list_url = "{}/todos?userId={}".format(base_url, employee_id)
-    todo_list_response = requests.get(todo_list_url)
-    todo_list = todo_list_response.json()
-
-    csv_filename = "{}.csv".format(employee_id)
-    with open(csv_filename, "w", newline="") as csvfile:
-        fieldnames = [
-                "USER_ID",
-                "USERNAME",
-                "TASK_COMPLETED_STATUS",
-                "TASK_TITLE"
-                ]
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-        writer.writeheader()
-
-        for task in todo_list:
-            writer.writerow({
-                "USER_ID": employee_id,
-                "USERNAME": employee_name,
-                "TASK_COMPLETED_STATUS": "True" if task["completed"]
-                else "False",
-                "TASK_TITLE": task["title"]
-                })
-
-    completed_tasks = 0
-    total_tasks = len(todo_list)
+    todo_list_url = user_info_url + "/todos"
+    user_info_response = requests.get(user_info_url).json()
+    todo_list_response = requests.get(todo_list_url).json()
+    username = user_info_response.get("username")
+    total_task = todo_list_response
     completed_task_titles = []
-    for task in todo_list:
-        if task["completed"]:
-            completed_tasks += 1
-            completed_task_titles.append(task["title"])
-
-    print(
-        "Employee {} is done with tasks({}/{}):".format(
-            employee_name,
-            completed_tasks,
-            total_tasks
-            )
-        )
-    for title in completed_task_titles:
-        print("\t {}".format(title))
+    for task in total_task:
+        completed = {}
+        completed["USER_ID"] = str(task.get("userId"))
+        completed["USERNAME"] = str(username)
+        completed["TASK_COMPLETED_STATUS"] = str(task.get("completed"))
+        completed["TASK_TITLE"] = str(task.get("title"))
+        completed_task_titles.append(completed)
+    header = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"]
+    with open("{}.csv".format(employee_id), "w") as csvfile:
+        csv_file = csv.DictWriter(
+                csvfile,
+                fieldnames=header,
+                quoting=csv.QUOTE_ALL
+                )
+        csv_file.writerows(completed_task_titles)
