@@ -36,8 +36,8 @@ if __name__ == '__main__':
             writer.writerow({
                 "USER_ID": employee_id,
                 "USERNAME": employee_name,
-                "TASK_COMPLETED_STATUS": "COMPLETE" if task["completed"]
-                else "INCOMPLETE",
+                "TASK_COMPLETED_STATUS": "True" if task["completed"]
+                else "False",
                 "TASK_TITLE": task["title"]
                 })
 
