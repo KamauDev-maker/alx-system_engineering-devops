@@ -10,12 +10,12 @@ base_url = "https://jsonplaceholder.typicode.com"
 
 employee_id = int(sys.argv[1])
 
-user_info_url = f"{base_url}/users/{employee_id}"
+user_info_url = "{}/users/{}".format(base_url, employee_id)
 user_info_response = requests.get(user_info_url)
 user_info = user_info_response.json()
 employee_name = user_info["name"]
 
-todo_list_url = f"{base_url}/todos?userId={employee_id}"
+todo_list_url = "{}/todos?userId={}".format(base_url, employee_id)
 todo_list_response = requests.get(todo_list_url)
 todo_list = todo_list_response.json()
 
@@ -35,4 +35,4 @@ print(
             )
         )
 for title in completed_task_titles:
-    print(f"\t {title}")
+    print("\t {}".format(title))
