@@ -6,7 +6,7 @@ import requests
 
 def number_of_subscribers(subreddit):
     """ set the custom User_agent"""
-    headers = { 'User-Agent': 'My Reddit API Client'}
+    headers = { 'User-Agent': 'Google Chrome Version 112.0.5615.49 '}
 
     url = 'https://reddit.com/r/{}/about.json'.format(subreddit)
     response = requests.get(url, headers=headers)
