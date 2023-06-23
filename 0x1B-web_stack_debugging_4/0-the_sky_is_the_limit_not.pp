@@ -1,14 +1,7 @@
-file_line { 'update_ulimit':
-	path	=> '/etc/default/nginx',
-	line	=> 'ULIMIT="-n 3072"',
-	match	=> '^ULIMIT=.*',
-	notify 	=> Exec['restart_nginx'],
-	require => Package['nginx'],
+exec { 'set limit to 2000':
+  path    => '/bin',
+  command => "sed -i 's/15/2000/' /etc/default/nginx"
 }
- exec { 'restart_nginx':
-	command		=> 'service nginx restart',
-	refreshonly	=> true,
-	path		=> ['/usr/bin', '/sbin', '/bin', '/usr/sbin'],
-	subscribe	=> File_line['update_ulimit'],
-	require		=> Package['nginx'],
+exec { 'reboot nginx':
+  command => '/usr/sbin/service nginx restart'
 }
