@@ -1,12 +1,4 @@
-file { '/var/www/html/wp-settings.php':
-  ensure  => file,
-  owner   => 'root',
-  group   => 'root',
-  mode    => '0644',
-  content => replace(
-    template('your_module/wp_settings.php.erb'),
-    '.phpp',
-    '.php',
-    'g',
-  ),
+exec { 'fix_phpp':
+  command => 'sed -i s/phpp/php/g /var/www/html/wp-settings.php',
+  path    => ['/bin', '/usr/bin/', '/usr/loca/bin/'],
 }
